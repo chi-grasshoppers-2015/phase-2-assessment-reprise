@@ -1,0 +1,30 @@
+<h3>
+	<%= @restaurant.name %>
+</h3>
+
+<div class="restaurant-details">
+	<p>Cuisine:<%= @restaurant.cuisine %></p>
+	<p>Located at: <%= @restaurant.address %>,<%= @restaurant.city %>,<%= @restaurant.state %><%= @restaurant.zip %></p>
+</div>
+
+<% if logged_in? %>
+
+	<% if !@restaurant.reviewers.include?(current_user) %>
+		<%= erb :"reviews/_new", layout: false %>
+	<% else %>
+		<%= erb :"reviews/_success" %>
+	<% end %>
+
+<% else %>
+	<a href="/sessions/new"><button>Log In to Review</button></a>
+<% end %>
+
+<div class="reviews-list">
+	<% @restaurant.reviews.each do |rev| %>
+		<p class="review-body">	
+			<small><%= rev.reviewer.email %> said:</small>
+			<%= rev.stars %> stars | 
+			<%= rev.body %>
+		</p>
+	<% end %>
+</div>

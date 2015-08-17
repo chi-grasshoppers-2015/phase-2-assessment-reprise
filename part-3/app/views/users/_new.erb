@@ -1,0 +1,19 @@
+<div class="user-info-div">
+	<h2>Join Today</h2>
+
+	<% if @error_msgs %>
+		<ul class="error-msgs">
+			<% @error_msgs.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	<% end %>
+
+	<form class="user-info-form" method="post" action="/users">
+		<label>Email:</label>
+		<input type="text" name="input[email]" placeholder="todd@example.com" value=<%= @entered_email %>>
+		<label>Password:</label>
+		<input type="password" name="input[password]" placeholder="hrd2gue$$">
+		<input type="submit" name="submit" value="Create Account">
+	</form>
+</div>
